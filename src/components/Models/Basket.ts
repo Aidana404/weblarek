@@ -1,7 +1,7 @@
 import type { IProduct } from '../../types';
 
 export class Basket {
-    private  items: IProduct[] = [];
+    private items: IProduct[] = [];
 
     getItems(): IProduct[] {
         return this.items;
