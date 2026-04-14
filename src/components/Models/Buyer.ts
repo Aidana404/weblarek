@@ -22,8 +22,12 @@ export class Buyer {
     }
 
     getData(): IBuyer {
+        if (this.payment === null) {
+            throw new Error('Не выбран способ оплаты');
+        }
+
         return {
-            payment: this.payment as TPayment,
+            payment: this.payment,
             email: this.email,
             phone: this.phone,
             address: this.address,
