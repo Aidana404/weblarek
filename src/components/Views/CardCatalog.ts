@@ -1,5 +1,6 @@
 import { IProduct } from '../../types';
-import { CardMedia, ICardActions } from './Card';
+import { CardMedia } from './CardMedia';
+import { ICardActions } from './Card';
 
 export type TCardCatalog = Pick<IProduct, 'title' | 'price' | 'image' | 'category'>;
 

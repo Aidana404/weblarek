@@ -22,7 +22,13 @@ export class Buyer {
         if (data.email !== undefined) {
             this.email = data.email;
         }
-        this.events.emit('buyer:changed');
+        this.events.emit('buyer:changed', {
+            payment: this.payment,
+            address: this.address,
+            email: this.email,
+            phone: this.phone,
+            errors: this.validate(),
+        });
     }
 
     getData(): IBuyer {
@@ -43,7 +49,13 @@ export class Buyer {
         this.address = '';
         this.phone = '';
         this.email = '';
-        this.events.emit('buyer:changed');
+        this.events.emit('buyer:changed', {
+            payment: this.payment,
+            address: this.address,
+            email: this.email,
+            phone: this.phone,
+            errors: this.validate(),
+        });
     }
 
     validate(): BuyerFieldErrors {

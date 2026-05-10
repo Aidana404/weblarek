@@ -1,9 +1,11 @@
 import { ensureElement } from '../../utils/utils';
 import { IProduct } from '../../types';
-import { CardMedia, ICardActions } from './Card';
+import { CardMedia } from './CardMedia';
+import { ICardActions } from './Card';
 
 export interface ICardPreview extends Pick<IProduct, 'title' | 'price' | 'image' | 'category' | 'description'> {
-    inBasket: boolean;
+    buttonText: string;
+    buttonDisabled: boolean;
 }
 
 export class CardPreview extends CardMedia<ICardPreview> {
@@ -24,17 +26,11 @@ export class CardPreview extends CardMedia<ICardPreview> {
         this.descriptionElement.textContent = value;
     }
 
-    set price(value: number | null) {
-        this.priceElement.textContent = value !== null ? `${value} синапсов` : 'Бесценно';
-        this.actionButton.disabled = value === null;
-        if (value === null) {
-            this.actionButton.textContent = 'Недоступно';
-        }
+    set buttonText(value: string) {
+        this.actionButton.textContent = value;
     }
 
-    set inBasket(value: boolean) {
-        if (!this.actionButton.disabled) {
-            this.actionButton.textContent = value ? 'Убрать из корзины' : 'В корзину';
-        }
+    set buttonDisabled(value: boolean) {
+        this.actionButton.disabled = value;
     }
 }
