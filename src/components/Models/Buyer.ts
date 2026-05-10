@@ -1,10 +1,13 @@
 import type { BuyerFieldErrors, IBuyer, TPayment } from '../../types';
+import type { IEvents } from '../base/Events';
 
 export class Buyer {
     private payment: TPayment | null = null;
     private address = '';
     private phone = '';
     private email = '';
+
+    constructor(private events: IEvents) {}
 
     setData(data: Partial<IBuyer>): void {
         if (data.payment !== undefined) {
@@ -19,6 +22,7 @@ export class Buyer {
         if (data.email !== undefined) {
             this.email = data.email;
         }
+        this.events.emit('buyer:changed');
     }
 
     getData(): IBuyer {
@@ -39,6 +43,7 @@ export class Buyer {
         this.address = '';
         this.phone = '';
         this.email = '';
+        this.events.emit('buyer:changed');
     }
 
     validate(): BuyerFieldErrors {
